@@ -25,3 +25,25 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+## Project Setup
+
+Clone the repo and then run the following commands
+
+```bash
+yarn // install dependencies
+yarn dev // start dev server
+yarn dev --open // start dev server and open browser
+yarn dev --port 3000 // start dev server on port 3000
+yarn build // build for production
+```
+
+### This project is initialized with the following options:
+
+- [x] TypeScript
+- [x] React
+- [x] Fast Refresh
+- [x] ESLint
+- [x] Prettier
+- [x] Tailwind CSS
+- [x] PostCSS

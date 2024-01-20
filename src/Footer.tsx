@@ -1,7 +1,6 @@
-
 const Footer = () => {
   return (
-    <div className="flex justify-between py-2">
+    <div className="flex flex-col items-center space-y-2 py-2 sm:flex-row sm:justify-between sm:space-y-0">
       <p className="text-center text-white">Copyrigth &copy; 2023 Agendify | Darbeida Abdelhak</p>
       <div className="flex items-center space-x-4">
         <a className="text-white" href="http://github.com/abdelhak002" target="_blank">

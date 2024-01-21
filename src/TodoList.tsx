@@ -30,9 +30,9 @@ const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
   return (
     <>
       <StarBackground todoCount={todoList.length} />
-      <div className="flex flex-col items-center space-y-3 rounded-lg bg-gray-900 p-2 sm:items-start">
+      <div className="flex flex-col items-center space-y-3 p-4 sm:items-start">
         <select
-          className="sm:text-md w-full rounded-lg border border-gray-600 bg-gray-800 p-2 text-white placeholder-gray-400 outline-none focus:border-[rgb(255,88,88)] focus:ring focus:ring-[rgb(255,88,88)] focus:ring-opacity-50 md:w-1/3"
+          className="sm:text-md w-full rounded-lg border border-gray-200 bg-white p-2 text-gray-700 placeholder-gray-600 shadow outline-none focus:border-[rgb(255,88,88)] focus:ring focus:ring-[rgb(255,88,88)] focus:ring-opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 md:w-1/3"
           value={filter}
           onChange={(e) => setFilter(e.target.value)}
           id="filter"
@@ -41,9 +41,9 @@ const TodoList = ({ todoList, setTodoList }: TodoListProps) => {
           <option value="COMPLETED">Completed</option>
           <option value="INCOMPLETED">Incompleted</option>
         </select>
-        <div className="z-10 w-full rounded-md bg-gray-800 px-2">
-          <ul className="w-full divide-y divide-gray-700">
-            {todoList.length === 0 && <li className="p-4 text-center text-xl text-white">There are no Todos</li>}
+        <div className="z-10 w-full px-2">
+          <ul className="w-full space-y-1 divide-y divide-gray-300 dark:divide-gray-700">
+            {todoList.length === 0 && <li className="p-4 text-center text-xl text-gray-800 dark:text-white">There are no Todos</li>}
             {todoList.length > 0 &&
               todoList.sort((a, b) => b.id - a.id).map((todo) => <TodoItem key={todo.id} todo={todo} getAllTodos={getAllTodos} setTodoList={setTodoList} />)}
           </ul>

@@ -1,3 +1,30 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: rgba(31, 41, 55, 1);
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgba(55, 65, 81, 1);
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(65, 75, 91, 1);
+  }
+}

@@ -16,6 +16,27 @@ const Table = ({ data }: { data: Invoice[] }) => {
       {openedInvoice && <Modal isOpen={isOpen} setIsOpen={setIsOpen} openedInvoice={openedInvoice} />}
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-100 p-2 md:pt-0">
+          <div className="md:hidden">
+            {data?.map((invoice) => (
+              <div key={invoice.InvoiceID} onClick={() => handleInvoiceClick(invoice)} className="mb-2 w-full rounded-md bg-white p-4">
+                <div className="flex items-center justify-between border-b pb-4">
+                  <div>
+                    <div className="mb-2 flex items-center">
+                      <p>Facture Id: {invoice.InvoiceID}</p>
+                    </div>
+                    <p className="text-sm text-gray-500">Client Nom: {invoice.ClientName}</p>
+                    <p className="text-sm text-gray-500">Fournisseur Nom: {invoice.SupplierName}</p>
+                  </div>
+                </div>
+                <div className="flex w-full items-center justify-between pt-4">
+                  <div>
+                    <p className="text-xl font-medium">TTC: {invoice.InvoiceItems.reduce((acc, item) => acc + calculateTTCAmount(item), 0).toFixed(2)}</p>
+                    <p>{formatDateString(invoice.InvoiceDate)}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
           <table className="relative hidden min-w-full text-gray-900 md:table">
             <thead className="sticky top-0 w-full rounded-lg bg-gray-100 text-left text-sm font-normal">
               <tr>
@@ -45,11 +66,9 @@ const Table = ({ data }: { data: Invoice[] }) => {
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
-                      {/* <Image src={invoice.image_url} className="rounded-full" width={28} height={28} alt={`${invoice.name}'s profile picture`} /> */}
                       <p>{invoice.InvoiceID}</p>
                     </div>
                   </td>
-                  {/* <td className="whitespace-nowrap px-3 py-3">{formatDateToLocal(invoice.InvoiceDate)}</td> */}
                   <td className="whitespace-nowrap px-3 py-3">{formatDateString(invoice.InvoiceDate)}</td>
                   <td className="whitespace-nowrap px-3 py-3">{invoice.ClientName}</td>
                   <td className="whitespace-nowrap px-3 py-3">{invoice.SupplierName}</td>

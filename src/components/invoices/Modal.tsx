@@ -27,7 +27,7 @@ const Modal = ({ isOpen, setIsOpen, openedInvoice }: { isOpen: boolean; setIsOpe
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex h-full items-center justify-center p-14 text-center">
+          <div className="flex h-full items-center justify-center p-4 text-center md:p-14">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -37,12 +37,34 @@ const Modal = ({ isOpen, setIsOpen, openedInvoice }: { isOpen: boolean; setIsOpe
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="min-h-full w-full max-w-4xl transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="min-h-full w-full transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all md:max-w-4xl">
                 <Dialog.Title as="h1" className="text-2xl font-bold italic leading-6 text-gray-900">
                   Facture N&ordm;: {openedInvoice.InvoiceID}
                 </Dialog.Title>
                 <div className="mt-4 inline-block min-w-full align-middle">
                   <div className="rounded-lg bg-gray-100 p-2 md:pt-0">
+                    <div className="md:hidden">
+                      {openedInvoice.InvoiceItems.map((item) => (
+                        <div key={item.ItemID} className="mb-2 w-full rounded-md bg-white p-4">
+                          <div className="flex items-center justify-between border-b pb-4">
+                            <div>
+                              <div className="mb-2 flex items-center">
+                                <p>{item.ItemLibelle}</p>
+                              </div>
+                              <p className="text-sm text-gray-500">Unité d&apos;Item:{item.ItemUnit}</p>
+                              <p className="text-sm text-gray-500">Quantité d&apos;item: {item.ItemQuantity}</p>
+                              <p className="text-sm text-gray-500">Prix d&apos;item: {item.ItemPrice}</p>
+                              <p className="text-sm text-gray-500">Taxe d&apos;item: {item.ItemTax}</p>
+                            </div>
+                          </div>
+                          <div className="flex w-full items-center justify-between pt-4">
+                            <div>
+                              <p className="text-xl font-medium">TTC: {calculateTTCAmount(item).toFixed(2)}</p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                     <table className="relative hidden min-w-full text-gray-900 md:table">
                       <thead className="w-full rounded-lg text-left text-sm font-normal">
                         <tr>
@@ -67,21 +89,21 @@ const Modal = ({ isOpen, setIsOpen, openedInvoice }: { isOpen: boolean; setIsOpe
                         </tr>
                       </thead>
                       <tbody className="bg-white">
-                        {openedInvoice.InvoiceItems.map((invoice) => (
+                        {openedInvoice.InvoiceItems.map((item) => (
                           <tr
-                            key={invoice.ItemID}
+                            key={item.ItemID}
                             className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                           >
                             <td className="whitespace-nowrap py-3 pl-6 pr-3">
                               <div className="flex items-center gap-3">
-                                <p>{invoice.ItemLibelle}</p>
+                                <p>{item.ItemLibelle}</p>
                               </div>
                             </td>
-                            <td className="whitespace-nowrap px-3 py-3">{invoice.ItemUnit}</td>
-                            <td className="whitespace-nowrap px-3 py-3">{invoice.ItemQuantity}</td>
-                            <td className="whitespace-nowrap px-3 py-3">{invoice.ItemPrice}</td>
-                            <td className="whitespace-nowrap px-3 py-3">{invoice.ItemTax} %</td>
-                            <td className="whitespace-nowrap px-3 py-3">{calculateTTCAmount(invoice).toFixed(2)}</td>
+                            <td className="whitespace-nowrap px-3 py-3">{item.ItemUnit}</td>
+                            <td className="whitespace-nowrap px-3 py-3">{item.ItemQuantity}</td>
+                            <td className="whitespace-nowrap px-3 py-3">{item.ItemPrice}</td>
+                            <td className="whitespace-nowrap px-3 py-3">{item.ItemTax} %</td>
+                            <td className="whitespace-nowrap px-3 py-3">{calculateTTCAmount(item).toFixed(2)}</td>
                           </tr>
                         ))}
                       </tbody>

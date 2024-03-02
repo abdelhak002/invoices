@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scrollbar-gutter: stable;
-  }
-
   /* width */
   ::-webkit-scrollbar {
     width: 14px;
